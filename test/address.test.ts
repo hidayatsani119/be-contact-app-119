@@ -79,7 +79,7 @@ describe("GET /api/contacts/:contactId(\\d+)/addresses/:addressId(\\d+)", () => 
   });
 });
 
-describe("PATCH /api/contacts/:contactId(\\d+)/addresses/:addressId(\\d+)", () => {
+describe("PUT /api/contacts/:contactId(\\d+)/addresses/:addressId(\\d+)", () => {
   beforeEach(async () => {
     await UserTest.create();
     await ContactTest.create();
@@ -96,7 +96,7 @@ describe("PATCH /api/contacts/:contactId(\\d+)/addresses/:addressId(\\d+)", () =
     const contact = await ContactTest.get();
     const address = await AddressTest.get();
     const response = await supertest(web)
-      .patch(`/api/contacts/${contact.id}/addresses/${address.id}`)
+      .put(`/api/contacts/${contact.id}/addresses/${address.id}`)
       .set("Authorization", "testtoken")
       .send({
         street: "Utestsreet",

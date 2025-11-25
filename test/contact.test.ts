@@ -61,7 +61,7 @@ describe("GET /api/contacts/:contactId", () => {
   });
 });
 
-describe("PATCH /api/contacts/:contactId", () => {
+describe("PUT /api/contacts/:contactId", () => {
   beforeEach(async () => {
     await UserTest.create();
     await ContactTest.create();
@@ -73,7 +73,7 @@ describe("PATCH /api/contacts/:contactId", () => {
   });
   it("should update exiting contact", async () => {
     const contact = await ContactTest.get();
-    const response = await supertest(web).patch(`/api/contacts/${contact.id}`).set("Authorization", "testtoken").send({
+    const response = await supertest(web).put(`/api/contacts/${contact.id}`).set("Authorization", "testtoken").send({
       first_name: "updatecontactfirst",
       last_name: "updatecontactlast",
       email: "updatecontact@mail.com",
@@ -151,7 +151,7 @@ describe("GET /api/contacts", () => {
 
     logger.debug(response.body);
     expect(response.status).toBe(200);
-    expect(response.body.data.length).toBe(0);
+    expect(response.body.data.length).toBe(1);
     expect(response.body.data[0].first_name).toContain("testcontact");
   });
 });
